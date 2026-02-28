@@ -4,7 +4,7 @@
 for adding module.css check video
 
 
-#props 
+# Props 
 
     function Student(props){
     return (
