@@ -226,4 +226,259 @@ Aisa kuch output ayega
 
 
 
+## 5. render list mein hi if compotnent bana le toh 
 
+        import PropTypes from 'prop-types'
+        
+        function Student(props){
+            const list=[ {id:1,name:"keshav",calorie:50},
+                {id:2,name:"kumar",calorie:100},
+                {id:3,name:"singh",calorie:400} ]    
+            const funclist=list.map((list)=>{return <li key={list.id}>{list.name} -: <b>{list.calorie}</b></li>}) // yaha pe maine key use ki vo humesha
+        // unique hona chahiye taki react ko pata chale ki konsa element change hua hai aur konsa nahi hua hai
+        
+        // list.sort((a,b)=> a.name.localeCompare(b.name))//sort in ascending order
+        // list.sort((a,b)=> b.name.localeCompare(a.name))//sort in descending order
+        // list.sort((a,b)=> a.calorie - b.calorie)//sort in ascending order
+        
+        // filter use
+        const list_low_calorie=list.filter((item)=>{return item.calorie<100})
+         
+        
+        const funclist_low_calorie=list_low_calorie.map((list)=>{return <li key={list.id}>{list.name} -: <b>{list.calorie}</b></li>})
+        
+        return (
+            <ol>{funclist_low_calorie}</ol>
+        )
+        
+        
+        }
+
+
+
+#6.same cheez bas tum ab alag alag cheeze behj sakte 
+
+App.jsx
+ 
+    import Card from "./card.jsx"
+    import Student  from "./student.jsx"   
+     
+    function App() {
+    
+       const fruits=[{id:1,name:"apple", calorie:50},{id:2,name:"banana",calorie:80},{id:3,name:"grapes",calorie:70}]
+       const vegetables=[{id:1,name:"carrot", calorie:30},{id:2,name:"broccoli",calorie:40},{id:3,name:"spinach",calorie:20}]
+       return (
+        <>
+        <Card />
+       {/* so if len of component is 0 hen dont tender */}
+       {fruits.length>0?<Student items={fruits} category="Fruits" />:null}
+        
+        {vegetables.length>0?<Student items={vegetables} category="Vegetables" />:null}
+        </>
+       )
+    }
+    
+    export default App
+
+
+Student.jsx ye hai 
+
+    import PropTypes from 'prop-types'
+    
+    function Student(props){
+        
+     const list=props.items
+     print(list)
+     const cat=props.category
+    
+     const list_print=list.map((item)=>{return <li key={item.id}> {item.name} = <b>{item.calorie}</b> </li>})
+    
+    return (
+       <>
+        <h2>{cat}</h2>
+        <ol className='list'>{list_print}</ol>
+       </>
+       
+    )
+    
+    
+    }
+     
+    export default Student
+
+OUTPUT
+
+<img width="184" height="232" alt="image" src="https://github.com/user-attachments/assets/1c1ebebd-c745-47f4-ad7f-85b9c081c92c" />
+
+
+
+# CLICK EVENTS
+
+basic click
+
+app.jsx
+ 
+    import Card from "./card.jsx"
+    import Student  from "./student.jsx" 
+    import Click from "./click.jsx"    
+     
+    function App() {
+    
+       const fruits=[{id:1,name:"apple", calorie:50},{id:2,name:"banana",calorie:80},{id:3,name:"grapes",calorie:70}]
+       const vegetables=[{id:1,name:"carrot", calorie:30},{id:2,name:"broccoli",calorie:40},{id:3,name:"spinach",calorie:20}]
+       return (
+        <>
+        <Card />
+       {/* so if len of component is 0 hen dont tender */}
+       {fruits.length>0?<Student items={fruits} category="Fruits" />:null}
+        
+        {vegetables.length>0?<Student items={vegetables} category="Vegetables" />:null}
+    
+          <Click />
+        </>
+       )
+    }
+    
+    export default App
+
+
+click.jsx
+
+    function Click(){
+        var count=0
+    
+    const handleClick=(name)=>{
+        if(count<5){
+        console.log("hey",name,"you have clicked ",count," times")
+    count++
+    }
+    else{
+        console.log("you have clicked more than 5 times")
+        count++
+    }
+    }
+    
+    
+    return (
+        <button onClick={()=>{handleClick("yo")}}>Click me</button>
+    )
+    }
+    export default Click;
+        
+
+Advance isme e event isme jo click hua uski sari info hoti so bahut kuch kar sakta tu usse chatgpt pe padh kya kya kar sakte hai isse 
+
+iss buttonko click kiya toh red and clicked likha aaya 
+
+    function Click(){
+        var count=0
+    
+    const handleClick=(e)=>{
+      e.target.style.backgroundColor="red"
+      e.target.innerText="Clicked"
+    }
+    
+    
+    return (
+        <button onClick={(e)=>{handleClick(e)}}>Click me</button>
+    )
+    }
+    export default Click;
+
+
+
+# USE STATES
+
+1. SAMJH LIKE MAAN EK NAME NAAM KE VARIABLE HAI AB JAB VO RETURN HAI LIKE VO SCREEN PE PRINT HO RAHA AB TU CHATA JAISE BUTTON CLICK THAT NAME CHANGE SO EVEN IF TU USS NAME VAR JO REUTRN SE UPAR DECLARE USSE CHANGE PAR VO SCREEN PE CHANGE NI HOGA SO ISLIYE DOM USE STATE USE KARTE HAR VARIBALE KO DECLARE KARNE KE LIYE JISSE USKE SATH EK USKA SETTER BHI JATA JISSE JAB BHI CALL VO APKE ELEMENT KO CHAGE KAR DEGA ON SCREEN BHI
+
+usestate.jsx
+
+ 
+    import React,{useState} from "react";
+    
+    
+    
+    function UseState() {
+    const [name,setName]=useState("keshav")
+    const [count,setCount]=useState(0)
+    
+    const handlename=()=>{
+        setName("kumar")
+    }
+    const handlecount=()=>{
+        setCount(count+1)
+    }
+    
+    return(
+        <>
+        <h2>MY NAME : {name}</h2>
+       
+        <button onClick={handlename}>Change Name</button>
+        <hr />
+         <p>Count: {count}</p>
+        <button onClick={handlecount}>Increment Count</button>
+    
+        
+        </>
+    )
+    
+    
+    
+    }
+    
+    export default UseState
+    
+<img width="268" height="187" alt="image" src="https://github.com/user-attachments/assets/4c25f957-2abf-4786-b08d-6befb624536c" />
+
+
+ek chota sa counter
+
+ css 
+ 
+         .container{
+          text-align: center;
+        }
+        .display{
+          font-weight: 800;
+          font-size:5rem;
+          color:red;
+        }
+        .container .btn{
+          padding: 10px 20px;
+          font-size: 1.5rem;
+          background-color: blue;
+          color: white;
+          border: black solid 2px;
+          cursor: pointer;
+        }
+        
+use state.jsx
+        
+    import React,{useState} from "react";
+    
+    
+    
+    function UseState() {
+     
+    const [count,setCount]=useState(0)
+    
+     
+    
+    return(
+    
+       <div className="container">
+        <p className="display">
+            {count}
+        </p>
+        <button className="btn" onClick={()=>setCount(count+1)}>+</button>
+        <button className="btn" onClick={()=>setCount(count-1)}>-</button>
+    <button className="btn" onClick={()=>setCount(0)}>Reset</button>
+       </div>
+        
+    )
+    
+    
+    
+    }
+    
+    export default UseState
