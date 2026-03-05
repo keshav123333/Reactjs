@@ -210,7 +210,7 @@ so sun maan le tere pas ek list ab tujheusko list ke fomat m print on screen so 
             const funclist=list.map((list)=>{return <li>{list}</li>})
         return (
             
-         funclist
+         <ul>{functlist}</ul>
         
         
         )
