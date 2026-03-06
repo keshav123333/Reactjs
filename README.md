@@ -538,6 +538,159 @@ use state more
         
         export default UseState
 
+# Color picker using use state 
+
+    import React,{useState} from "react"
+    
+    function Colorpicker(){
+        const [color,setColor]=React.useState("red")
+        const handleColor=(e)=>{
+            setColor(e.target.value)
+        }
+        return (
+            <div className="colorpicker-container">
+            <h2>Color Picker</h2>
+            <div style={{backgroundColor:color}}> 
+            #isme like jab stryle toh {{}} double bracket ke andar hota hai style humesha 
+                selcted color is {color}
+            </div>
+            <label htmlFor=""> Choose a color:
+            <input type="color" value={color} onChange={(e) => handleColor(e)} />
+    </label>
+            </div>
+        )
+    }
+    
+    
+    export default Colorpicker
+
+
+# Updater function 
+
+ 
+    import React,{useState} from "react";
+    
+    
+    
+    function UseState() {
+     
+    const [count,setCount]=useState(0)
+    function handleIncrement(){
+    setCount(count+1)
+    setCount(count+1)
+    {niche dekh}
+    }
+    return(
+          <div>
+            <p>Count: {count}</p>
+            <button onClick={handleIncrement}>Increment</button>
+          </div>
+    )
+    
+    
+    
+    }
+    
+    export default UseState
+
+
+     #yaha pe dekh maine count ko do baar +1 so jabincrement wala button click toh +2 hona chaiye but ni +1 one hi as reat sare uso lega and 
+    setCount(0+1)
+    setCount(0+1)
+    so dono mein dekh 0 intially jayega and chahe kitne cout laga le vo in sabko ek sath so sirf ek hi baar hogi increment 
+    maan le aise 
+        function handleIncrement(){
+    setCount(count+1)
+    setCount(count+2)
+    
+    } so count =0 but last mein count +2 so 0+2 abki baar sirf do ka increment if ye hi func 
+
+     function handleIncrement(){
+    setCount(count+2)
+    setCount(count+1)
+    toh 0+2 then count ki value 0+1 so funal value 1 hi hogi na ki 2 problem  
+    
+    }
+
+
+#iss problem ko solve updater function isse normal func call m bhi use karo as ye professional way
+
+ 
+    import React,{useState} from "react";
+    
+    // update function like 
+    
+    function UseState() {
+     
+    const [count,setCount]=useState(0)
+    function handleIncrement(){
+    setCount(c => c+1)  // dono tarike se kar sakta hai tu liye wala more easy and aise hi karte hai mainly isme c is the previous value of count (0) and hum c+1 (1)return karte then 
+    // niche wale func mein c+1 wali value jati 1 and ab niche (c) ye c 1 and return 1+2 so 3 final value hogi c ki 
+    setCount((c) => {return c+2})
+    
+    }
+    function handleReset(){
+       setCount(c => c=0)
+    }
+    return(
+          <div>
+            <p>Count: {count}</p>
+            <button onClick={handleIncrement}>Increment</button>
+            <button onClick={handleReset}>Reset</button>
+          </div>
+    )
+    
+    
+    
+    }
+    
+    export default UseState
+
+
+# Object change 
+
+ 
+    import React,{useState} from "react";
+    
+    // update function like 
+    
+    function UseState() {
+     
+    const [car,setCar]=useState({
+       name:"BMW",
+       model:"X5",
+       year:2020
+    })
+    const handlename=(e)=>{
+    setCar(c=> {return {...c,name:e.target.value}})
+    // so yaha ...c ne baki sari value as it is rahi sirf name change ho gaya so c prev value thi usme se sari 
+    // value aayi then name naya chala gaya and ye nayi dict ab car mein save
+     
+    }
+    const handlemodel=(e)=>{
+       setCar(c=> {return {...c,model:e.target.value}})}
+    const handleyear=(e)=>{
+       setCar(c=> {return {...c,year:e.target.value}})}
+    return(
+          <div>
+    <h2>Car Details</h2>
+    <p>Name: {car.name}</p>
+    <p>Model: {car.model}</p>
+    <p>Year: {car.year}</p>
+    <input type="text" value={car.name} onChange={(e)=>handlename(e)} />
+    <input type="text" value={car.model} onChange={(e)=>handlemodel(e)} />
+    <input type="number" value={car.year} onChange={(e)=>handleyear(e)} />
+          </div>
+    )
+    
+    
+    
+    }
+    
+    export default UseState
+
+    <img width="550" height="190" alt="image" src="https://github.com/user-attachments/assets/c65fba12-19ad-4513-b0b1-f228e607bfba" />
+
 
 
 
