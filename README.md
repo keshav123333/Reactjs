@@ -694,3 +694,95 @@ use state more
 
 
 
+# Add array
+
+ ye code errror isme dekh main cheez samjh isme addelmnt m like maine foods m inp.value dali but niche inp.value="" so as vo pura func ek baar mein hota so jab nich empt string hui toh uoar food m bhi emoty string gayi as inp
+ 
+        import React,{useState} from "react";
+        
+       
+        
+        function UseState() {
+           const [foods,setFood]=useState(["APPLE","banane","gauava"])
+        
+        
+         const remove=(index)=>{
+            setFood((f)=>f.filter(
+              (element,i)=> i!=index
+            ))  // so yaha pe ye list wala isse index bhejega jisko ye lega but ye usse
+           //  filter karne m use like set food f jo pehle ka usko check uske har ek eemt and index check if vo index uske alawa toh filter 
+         }
+         const addelmnt=()=>{
+          const inp=document.querySelector("#add");
+          setFood((f)=>[...f,value])
+           
+          inp.value="" 
+         }
+        return(
+        <div>
+        <ul>
+           {/* index yaha har uska index cal kar lega  */}
+           {foods.map((food,index)=>
+              <li key={index} onClick={(e)=>remove(index)}>{food}</li>
+           )}
+        
+        </ul>
+        
+        <input type="text" id="add" />
+        <button onClick={addelmnt}>ADD</button>
+        
+        </div>
+        
+        )
+        
+        }
+        
+        export default UseState
+
+
+but ye kaam kar raha isme humne pehle inp ki value store so even if change hui inp ki value baad mein koi dikkat ni as var. declare ek baar m static use state ki tarah dynamic ni ki inp ki vaue baad m change toh vo bhi baad ka wait and inp ke sath change 
+
+
+ 
+        import React,{useState} from "react";
+        
+ 
+        
+        function UseState() {
+           const [foods,setFood]=useState(["APPLE","banane","gauava"])
+        
+        
+         const remove=(index)=>{
+            setFood((f)=>f.filter(
+              (element,i)=> i!=index
+            ))  // so yaha pe ye list wala isse index bhejega jisko ye lega but ye usse
+           //  filter karne m use like set food f jo pehle ka usko check uske har ek eemt and index check if vo index uske alawa toh filter 
+         }
+         const addelmnt=()=>{
+          const inp=document.querySelector("#add");
+          // save kar li value
+          const op=inp.value
+          setFood((f)=>[...f,op])
+           
+          inp.value="" 
+         }
+        return(
+        <div>
+        <ul>
+           {/* index yaha har uska index cal kar lega  */}
+           {foods.map((food,index)=>
+              <li key={index} onClick={(e)=>remove(index)}>{food}</li>
+           )}
+        #jaise hi list pe click vo delete ho jayegi
+        </ul>
+        
+        <input type="text" id="add" />
+        <button onClick={addelmnt}>ADD</button>
+        
+        </div>
+        
+        )
+        
+        }
+        
+        export default UseState
