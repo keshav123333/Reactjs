@@ -482,3 +482,62 @@ use state.jsx
     }
     
     export default UseState
+
+
+
+use state more 
+
+ 
+        import React,{useState} from "react";
+        
+        
+        
+        function UseState() {
+         
+         const [name,setName]=useState("keshav")
+         const[description,setDescription]=useState("type the description")
+         const [shipping,setshipping]=useState("")
+        const handleName=(e)=>{
+            setName(e.target.value)
+        }
+        
+        const handleDes=(e)=>{
+                setDescription(e.target.value)
+        }
+        const handleShipping=(e)=>{
+              setshipping(e.target.value)
+        }
+        return(
+        
+           <div className="container"> 
+             <input type="text" value={name} onChange={(e)=>handleName(e)}/>
+             <p>Name: {name}</p>
+        <input type="text" value={description} onChange={(e)=>handleDes(e)} />
+        <p>Description: {description}</p>
+        #isme niche onchange aise iss check ko check onchange trigger and pickup ho jayegi value and tabhi checked wala shipping ko check karte rahega like shipping ==pickup tabhi check
+        #jaise tune dilevery wale button ko dabaya ye uncheck as ab checked == delivery 
+        
+        <label >
+           <input type="radio" value="pickup" checked={shipping === "pickup"} onChange={handleShipping} />
+           Pickup
+        </label>
+        <label >
+           <input type="radio" value="delivery" checked={shipping === "delivery"} onChange={handleShipping} />
+           Delivery
+        </label>
+        
+        <p>{shipping}</p>
+        
+           </div>
+            
+        )
+        
+        
+        
+        }
+        
+        export default UseState
+
+
+
+
