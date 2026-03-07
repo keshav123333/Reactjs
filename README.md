@@ -786,3 +786,69 @@ but ye kaam kar raha isme humne pehle inp ki value store so even if change hui i
         }
         
         export default UseState
+
+# Use dict and Array 
+
+
+        import React,{useState} from "react";
+
+        function UseState() {
+        
+        const [carName,setName] = useState("");
+        const [carYear,setYear] = useState("");
+        const [carModel,setModel] = useState("");
+        const [carDb,setDb] = useState([]);
+        
+        const handleName = (e)=>{
+         setName(e.target.value)
+        }
+        
+        const handleYear = (e)=>{
+         setYear(e.target.value)
+        }
+        
+        const handleModel = (e)=>{
+         setModel(e.target.value)
+        }
+        
+        const handledb = ()=>{
+         setDb(db => [...db,{
+           name:carName,
+           year:carYear,
+           model:carModel
+         }])
+        }
+        
+        const removeCar = (index)=>{
+         setDb(c => c.filter((ele,i)=> i !== index))
+        }
+        
+        return(
+        <div>
+        
+        <ul>
+        {carDb.map((ele,index)=> 
+        <li key={index} onClick={()=>removeCar(index)}>
+        {ele.name}, {ele.year}, {ele.model}
+        </li>
+        )}
+        </ul>
+        
+        <input type="text" value={carName} placeholder="Name" onChange={handleName} />
+        <p></p>
+        
+        <input type="text" value={carModel} placeholder="Model" onChange={handleModel} />
+        <p></p>
+        
+        <input type="date" value={carYear} onChange={handleYear} />
+        
+        <button onClick={handledb}>ADD</button>
+        
+        </div>
+        )
+        }
+        
+        export default UseState
+
+
+<img width="222" height="178" alt="image" src="https://github.com/user-attachments/assets/ba76163f-ba72-480f-b40b-dda51892f073" />
