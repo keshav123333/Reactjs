@@ -852,3 +852,12 @@ but ye kaam kar raha isme humne pehle inp ki value store so even if change hui i
 
 
 <img width="222" height="178" alt="image" src="https://github.com/user-attachments/assets/ba76163f-ba72-480f-b40b-dda51892f073" />
+
+
+#IMPORTANT FUNC CALL KE LIYE 
+
+💡 React ka rule yaad rakh
+
+Situation	Syntax
+simple function call	onClick={addtask}
+parameter bhejna	onClick={()=>deleteTask(i)}
