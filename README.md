@@ -861,3 +861,112 @@ but ye kaam kar raha isme humne pehle inp ki value store so even if change hui i
 Situation	Syntax
 simple function call	onClick={addtask}
 parameter bhejna	onClick={()=>deleteTask(i)}
+
+
+
+# to do list
+
+        import React, { useState } from "react";
+        
+        function UseState() {
+        
+        const [newtask, setnew] = useState("");
+        const [tasklist, setlist] = useState([]);
+        
+        function addtask() {
+          if (newtask.trim() !== "") {
+            setlist(t => [...t, newtask]);
+            setnew("");
+          }
+        }
+        
+        function handleinputchange(e) {
+          setnew(e.target.value);
+        }
+        
+        function itemdelete(index) {
+          const newlist = tasklist.filter((_, i) => i !== index);
+          setlist(newlist);
+        }
+           // function UseEffect(){
+        //     function moveup(index){
+        //  if(index > 0){
+        //    const newlist = [...tasklist]
+        
+        //    [newlist[index], newlist[index-1]] =
+        //    [newlist[index-1], newlist[index]]
+        
+        //    setlist(newlist)
+        //  }
+        // }
+        
+        // function movedown(index){
+        //  if(index < tasklist.length-1){
+        //    const newlist = [...tasklist]
+        
+        //    [newlist[index], newlist[index+1]] =
+        //    [newlist[index+1], newlist[index]]
+        
+        //    setlist(newlist)
+        //  }
+        // }
+    
+
+        
+        
+        function moveup(index) {
+          if (index > 0) {
+        
+            const newlist = [...tasklist];
+        
+            let temp = newlist[index];
+            newlist[index] = newlist[index - 1];
+            newlist[index - 1] = temp;
+        
+            setlist(newlist);
+          }
+        }
+        
+        function movedown(index) {
+          if (index < tasklist.length - 1) {
+        
+            const newlist = [...tasklist];
+        
+            let temp = newlist[index];
+            newlist[index] = newlist[index + 1];
+            newlist[index + 1] = temp;
+        
+            setlist(newlist);
+          }
+        }
+        
+        return (
+        <div className="todo-container">
+        
+        <input
+        type="text"
+        value={newtask}
+        onChange={handleinputchange}
+        placeholder="ENTER THE TASK..."
+        />
+        
+        <button onClick={addtask}>ADD</button>
+        
+        <ul>
+        {tasklist.map((ele, index) => (
+        <li key={index}>
+        <span>{ele}</span>
+        
+        <button onClick={() => itemdelete(index)}>Delete</button>
+        <button onClick={() => moveup(index)}>UP</button>
+        <button onClick={() => movedown(index)}>DOWN</button>
+        
+        </li>
+        ))}
+        </ul>
+        
+        </div>
+        );
+        }
+        
+        export default UseState;
