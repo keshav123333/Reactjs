@@ -970,3 +970,94 @@ parameter bhejna	onClick={()=>deleteTask(i)}
         }
         
         export default UseState;
+
+
+# USE Effect 
+iske liye u can use code 
+
+1️⃣ Example: Count with useEffect
+    
+    Ye dikhata hai ki dependency change hone par effect run hota hai.
+    
+    import React, { useState, useEffect } from "react";
+    
+    function Counter() {
+    
+    const [count, setCount] = useState(0);
+    
+    useEffect(() => {
+     console.log("Count changed:", count);
+    }, [count]);   // run on mount + when count changes
+    
+    return (
+    <div>
+    <h2>Count: {count}</h2>
+    
+    <button onClick={() => setCount(count + 1)}>
+    Increment
+    </button>
+    
+    </div>
+    );
+    
+    }
+    
+    export default Counter;
+
+2️⃣ Example: addEventListener + cleanup
+
+Ye real use case hai jahan useEffect use hota hai.
+
+    import React, { useEffect } from "react";
+    
+    function MouseTracker() {
+    
+    useEffect(() => {
+    
+    function handleMove(e) {
+     console.log("Mouse X:", e.clientX);
+    }
+    
+    window.addEventListener("mousemove", handleMove);
+    
+    // cleanup function
+    return () => {
+     window.removeEventListener("mousemove", handleMove);
+    };
+    
+    }, []);
+    
+    return (
+    <h2>Move your mouse and check console</h2>
+    );
+    
+    }
+
+export default MouseTracker;
+Ye cleanup kyon zaroori hai
+
+Agar remove nahi karoge:
+
+component mount
+↓
+event listener add
+
+component unmount
+↓
+listener still active
+↓
+memory leak
+
+Isliye:
+
+
+
+sun meri baat jaise ki maine samjh ki use effect kaam kaise karta so maan le like set inteval use effect ke bahar banaya maine toh har jab rerender tab ek bnaya setinetval ban jata so problem hoti hai hai so like use effect m daal de and [] dependencies de de isse jab ek baar run hota ek setinterval banta start m then ab koi ni banega ab maan le jase devce unmount ye setinterval hat jayega so ek hi setinteval har rerender pe rahega isse mostly inn kamo ke liye as ek wndow m ek hi bane ye tph acha hai 
+API call
+
+Timer (setInterval)
+
+Event listeners
+
+DOM manipulation
+ 
