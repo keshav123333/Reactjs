@@ -1066,4 +1066,95 @@ DOM manipulation
 
 # USE CONTEXT 
 
-ab maan ek case jsme box ke andar box ja raha hai so uske liye maine maan le pehle props comp b then usse niche ki taraf pass on karta gaya 
+ab maan ek case jsme box ke andar box ja raha hai so uske liye maine maan le 
+pehle props comp b then usse niche ki taraf pass on karta gaya 
+
+app.jsx
+ 
+        import Card from "./card.jsx"
+         
+        import ComponentA from "./componentA.jsx"   
+         
+        function App() {
+        
+           const fruits=[{id:1,name:"apple", calorie:50},{id:2,name:"banana",calorie:80},{id:3,name:"grapes",calorie:70}]
+           const vegetables=[{id:1,name:"carrot", calorie:30},{id:2,name:"broccoli",calorie:40},{id:3,name:"spinach",calorie:20}]
+           return (
+            <>
+            <Card />
+         
+         <ComponentA></ComponentA>
+        
+          
+            </>
+           )
+        }
+        
+        export default App
+
+
+component a
+
+        import ComponentB from "./componentB";
+        import React ,{useState,createContext} from "react"
+        export const UserContext=createContext()
+        function ComponentA() {
+            const [name,setName]=useState("keshav")
+            return (
+                <div className="box">
+                    <h1>Component A</h1>
+                    <h2> HII {name}</h2>
+                    <UserContext.Provider value={name}>
+                        <ComponentB user={name} />
+                    </UserContext.Provider>   // so yaha se niche ki side pe ye name user ontext gaya abbuse kar sakte hai 
+                </div>
+            );
+        }
+        export default ComponentA
+
+component b
+
+    import ComponentC from "./componentc";
+    
+    function ComponentB() {
+        return (
+            <div className="box">
+                <h1>Component B</h1>
+                <ComponentC />
+            </div>
+        )
+    }
+    
+    export default ComponentB;
+
+component c
+
+        import ComponentD from "./componentD";
+        
+        function ComponentC() {
+            return (
+                <div className="box">
+                    <h1>Component C</h1>
+                    <ComponentD />
+                </div>
+            );
+        }
+        export default ComponentC
+
+component D
+
+        import React ,{useState,createContext,useContext} from "react"
+        import { UserContext } from "./componentA.jsx"
+        
+        function ComponentD() {
+            const name = useContext(UserContext);
+            return (
+                <div className="box">
+                    <h1>Component D</h1>
+                    <h2> HII {name}</h2>
+                </div>
+            );
+        }
+        export default ComponentD
+     
+
