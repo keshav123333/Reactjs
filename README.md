@@ -1060,4 +1060,10 @@ Timer (setInterval)
 Event listeners
 
 DOM manipulation
- 
+
+
+
+
+# USE CONTEXT 
+
+ab maan ek case jsme box ke andar box ja raha hai so uske liye maine maan le pehle props comp b then usse niche ki taraf pass on karta gaya 
