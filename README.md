@@ -1156,5 +1156,36 @@ component D
             );
         }
         export default ComponentD
-     
 
+# Use Ref
+
+
+jab hum use state use and usse like kuch change hota usme toh toh pura doc rerender hota 
+isse samjhne ke liye iska video deh sakta brocode ka use useref wala part m hai detail m 
+
+so use ref se bante so even ye change pura doc rerender ni hota 
+
+aise kuch
+
+        import React, {useRef} from "react";
+        
+        function UseRef() {
+            const ref = useRef(null);
+        
+            const handleClick = () => {
+                console.log(ref.current); // Access the DOM element
+                 
+            }
+            return (
+                <div>
+                     <button onClick={handleClick} >
+                        Click me
+                     </button>
+                </div>
+            );
+        }
+        
+        export default UseRef;
+             
+        
+**and isse use to like isse use toh handle dom elemtn too**
