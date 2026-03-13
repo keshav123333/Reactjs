@@ -1268,37 +1268,108 @@ sun jaise maine ye code likha isme like console.log rendered ek baar likha and f
 
 tabhi use state use karte so jab count change window fir rerender hoti hai jisse change dikhate hai but rerender kabhi kabhi problem ho sakti hai vo dekh lena like event listner laga diya bahr toh event listner ke andar naye listner bante jaynge 
 
-import React, {useRef} from "react";
-
-function UseRef() {
-    const ref = useRef(null);
-
-    const handleClick = () => {
-        console.log(ref.current); // Access the DOM element
-         
+    import React, {useRef} from "react";
+    
+    function UseRef() {
+        const ref = useRef(null);
+    
+        const handleClick = () => {
+            console.log(ref.current); // Access the DOM element
+             
+        }
+        const changecolor=()=>{
+            ref.current.style.backgroundColor="red"
+        }
+    
+    let count=0
+        setInterval(()=>{
+            count++
+            console.log(count)
+        },1000)
+        console.log("rendered")
+        return (
+            <div>
+                 <button onClick={handleClick} >
+                    Click me
+                 </button>
+    
+                 <button onClick={changecolor} ref={ref}>
+                    Change Color
+                 </button>
+     
+            </div>
+        );
     }
-    const changecolor=()=>{
-        ref.current.style.backgroundColor="red"
-    }
+    
+    export default UseRef;
 
-let count=0
-    setInterval(()=>{
-        count++
-        console.log(count)
-    },1000)
-    console.log("rendered")
-    return (
-        <div>
-             <button onClick={handleClick} >
-                Click me
-             </button>
 
-             <button onClick={changecolor} ref={ref}>
-                Change Color
-             </button>
- 
-        </div>
-    );
-}
 
-export default UseRef;
+# Stopwatch 
+isme most important thing yaha pe ye ki jab running change so purana interval remove hoga then hi jake likenaya interval ke liye check karga so isrunning true so state chage so use effect bhi rerender and ek intervl bana degi jo update karta rahega curr time and jaise hi isrunning false so vapis rerender hoga par pehle pehle wala interval remove hoga then naya bana vo check kya isrunning true ni so dont run koi interval bana ni so remove bhi ni 
+
+        import React ,{useState,useEffect,useRef} from "react";
+        import { use } from "react";
+        
+        function StopWatch(){
+        const [isRunning,setRunning]=useState(false)
+        const [currtime,setcurr]=useState(0);
+        const starttime=useRef(0)
+        const intid=useRef(null)
+        
+        useEffect(()=>{
+        if(isRunning){
+            intid.current=setInterval(()=>{
+            let curr=Date.now()-starttime.current
+            setcurr(curr)
+        
+            },10)
+        
+        }
+        
+        return ()=>{
+            clearInterval(intid.current)
+        }
+        },[isRunning])
+        
+        function start(){
+            setRunning(true)
+            starttime.current=Date.now()
+        }
+        function stop(){
+            setRunning(false)
+        }
+        
+        function reset(){
+            setcurr(0)
+            setRunning(false)
+        
+        }
+        
+        
+        
+        function format(){
+            let minutes = Math.floor((currtime / (1000 * 60)) % 60);
+            let seconds = Math.floor((currtime / 1000) % 60);
+            let milliseconds = Math.floor((currtime % 1000) / 10);
+            minutes=String(minutes).padStart(2,"0")
+            seconds=String(seconds).padStart(2,"0")
+            milliseconds=String(milliseconds).padStart(2,"0")
+        
+        
+            return `${minutes}:${seconds}.${milliseconds}`
+        }
+        
+        return (
+            <div>
+                <p>{format()}</p>
+        <button onClick={start}>start</button>
+        <button onClick={stop}>stop</button>
+        <button onClick={reset}>reset</button>
+            </div>
+        )
+        
+        
+        }
+        
+        export default StopWatch
