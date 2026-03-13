@@ -1061,6 +1061,47 @@ Event listeners
 
 DOM manipulation
 
+Digitl clock 
+
+        import React ,{useEffect,useState} from "react"
+        
+        function Digitalclock(){
+            const [time,setTime]=useState(new Date())
+            useEffect(()=>{
+                const handle=setInterval(()=>{
+                    setTime(new Date())
+                },1000)
+        
+                return()=>{
+                    clearInterval(handle)
+                }
+            },[])
+        
+            function gettime(){
+                let hour=time.getHours()
+                const minute=time.getMinutes()
+                const seconds=time.getSeconds()
+                const meridian= hour>12 ?"PM":"AM"
+                hour=hour%12||12
+                return `${getprop(hour)} : ${getprop(minute)} : ${getprop(seconds)} : ${getprop(meridian)}`
+        
+            }
+            function getprop(text){
+           return  text<10?"0"+text:text
+            }
+        
+        
+        
+        return (
+            <div>
+                <span>{gettime()}</span>
+        
+            </div>
+        )
+        }
+        
+        export default Digitalclock
+
 
 
 
@@ -1189,3 +1230,75 @@ aise kuch
              
         
 **and isse use to like isse use toh handle dom elemtn too**
+
+        import React, {useRef} from "react";
+        
+        function UseRef() {
+            const ref = useRef(null);
+        
+            const handleClick = () => {
+                console.log(ref.current); // Access the DOM element
+                 
+            }
+            const changecolor=()=>{
+                ref.current.style.backgroundColor="red"
+            }
+        
+        
+            return (
+                <div>
+                     <button onClick={handleClick} >
+                        Click me
+                     </button>
+        
+                     <button onClick={changecolor} ref={ref}>
+                        Change Color
+                     </button>
+         
+                </div>
+            );
+        }
+        
+        export default UseRef;
+
+
+
+# important 
+sun jaise maine ye code likha isme like console.log rendered ek baar likha and fir time chount ko bdata but rerender ni sirf ek baar hi rendered print 
+
+tabhi use state use karte so jab count change window fir rerender hoti hai jisse change dikhate hai but rerender kabhi kabhi problem ho sakti hai vo dekh lena like event listner laga diya bahr toh event listner ke andar naye listner bante jaynge 
+
+import React, {useRef} from "react";
+
+function UseRef() {
+    const ref = useRef(null);
+
+    const handleClick = () => {
+        console.log(ref.current); // Access the DOM element
+         
+    }
+    const changecolor=()=>{
+        ref.current.style.backgroundColor="red"
+    }
+
+let count=0
+    setInterval(()=>{
+        count++
+        console.log(count)
+    },1000)
+    console.log("rendered")
+    return (
+        <div>
+             <button onClick={handleClick} >
+                Click me
+             </button>
+
+             <button onClick={changecolor} ref={ref}>
+                Change Color
+             </button>
+ 
+        </div>
+    );
+}
+
+export default UseRef;
