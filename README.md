@@ -1,5 +1,6 @@
 # Reactjs
 
+like for downloading npm create vite@latest
 
 for adding module.css check video
 
